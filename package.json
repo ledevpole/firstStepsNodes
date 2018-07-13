@@ -1,0 +1,11 @@
+{
+	"name": "mon-app",
+	"author": "Mathias <ledevpole@gmail.com>",
+	"version": "0.1.0",
+	"depenciencies": {
+		"markdown": "~0.4"
+	},
+	"dependencies": {
+		"express": "^4.16.3"
+	}
+}
