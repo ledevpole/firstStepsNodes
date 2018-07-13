@@ -1,0 +1,17 @@
+<h1> Ma todo-list </h1>
+
+<%if(todos) { 
+	for(i = 0; i < todos.length ; i++) {%>
+
+		<ul>
+
+			<li> <%= (i+1)+'  '+todos[i]  %> <a href='/del/ <%= i %>'>✘</a> </li>
+
+		</ul>
+<% }
+} %>
+
+<form action="/" method="GET"> 
+	<input type="text" name="todo" id="todo" placeholder="todo">
+	<input type="submit">
+</form>
