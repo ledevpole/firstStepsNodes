@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <meta charset="utf-8" />
+
+        <title>Superchat!</title>
+
+    </head>
+
+ 
+
+    <body>
+
+        <h1>Superchat V1!</h1>
+
+        <div id="target"></div>
+
+
+        <form action="" method="POST">
+
+            <input id="message" type="text" name="message" placeholder="Hey guys! How are you doing?">
+
+            <button type="button" id="submit">SEND</button>
+
+        </form>
+
+        <p><input type="button" value="Embêter le serveur" id="poke" /></p>
+
+
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+        <script src="/socket.io/socket.io.js"></script>
+
+        <script>
+
+            var socket = io.connect('http://localhost:8080');
+
+
+            // On demande le pseudo au visiteur...
+
+            var pseudo = prompt('Quel est votre pseudo ?');
+
+            // Et on l'envoie avec le signal "petit_nouveau" (pour le différencier de "message")
+
+            socket.emit('petit_nouveau', pseudo);
+
+
+            // On affiche une boîte de dialogue quand le serveur nous envoie un "message"
+
+            socket.on('message', function(message) {
+
+                $('#target').append("<p>"+message+"</p>");
+
+            });
+
+            // Lorsqu'on clique sut le bouton send, on prend la valeur de message et on l'envoie au serveur
+
+            $('#submit').click(function() {
+
+                var message = $('#message').val();
+
+                socket.emit('message', message);
+
+            });
+
+            // Lorsqu'on clique sur le bouton, on envoie un "message" au serveur
+
+            $('#poke').click(function () {
+
+                socket.emit('message', 'Salut serveur, ça va ?');
+
+            });
+
+        </script>
+
+    </body>
+
+</html>
