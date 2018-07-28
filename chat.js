@@ -38,6 +38,8 @@ io.sockets.on('connection', function (socket, pseudo) {
 
     socket.on('petit_nouveau', function(pseudo) {
 
+        pseudo = ent.encode(pseudo);
+        
         socket.pseudo = pseudo;
 
     });
@@ -53,6 +55,7 @@ io.sockets.on('connection', function (socket, pseudo) {
             socket.message = message;
             console.log(socket.pseudo + '  : ' + message);
             // On signale aux autres clients qu'il y a un nouveau venu
+            socket.emit('message', socket.pseudo + '  : ' + message );
 
             socket.broadcast.emit('message', socket.pseudo + '  : ' + message );
 
